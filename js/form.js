@@ -6,6 +6,18 @@ botaoAdicionar.addEventListener("click", function(event){
 
     var paciente = pegarPacienteDoForm(form);
 
+    var erros = validaPaciente(paciente);
+
+    var alerta = document.querySelector(".mensagens-erro");
+
+    if(erros.length > 0 ){
+        exibirMensagensDeErro(erros);
+        return;
+    } else{
+        alerta.textContent = "Paciente adicionado com sucesso!";
+        alerta.classList.add("paciente-valido-form");
+    }
+
     var pacienteTr = criarTr(paciente);
 
     var tabela = document.querySelector("#tabela-pacientes");
@@ -14,6 +26,7 @@ botaoAdicionar.addEventListener("click", function(event){
     form.reset();
 
 });
+
 
 function pegarPacienteDoForm(form){
 
@@ -27,6 +40,48 @@ function pegarPacienteDoForm(form){
 
     return paciente;
 }
+
+function validaPaciente(paciente){
+
+    var erro = [];
+
+    if(paciente.nome.length == 0){
+        erro.push("O nome do paciente não pode estar em branco");
+    }
+
+    if(paciente.gordura.length == 0){
+        erro.push("A porcentagem de gordura do paciente não pode estar em branco");
+    }
+
+    if(paciente.altura.length == 0){
+        erro.push("A altura do paciente não pode estar em branco");
+    }
+
+    if(paciente.peso.length == 0){
+        erro.push("O peso do paciente não pode estar em branco");
+    }
+
+    if(!validaPeso(paciente.peso)){
+        erro.push("Peso inválido, por favor, revise os dados antes de submete-los!");
+    } 
+    if(!validaAltura(paciente.altura)){
+        erro.push("Altura inválida, por favor, revise os dados antes de submete-los!");
+    }
+
+    return erro;
+}
+
+function exibirMensagensDeErro(erros){
+    var alerta = document.querySelector(".mensagens-erro");
+    alerta.innerHTML = "";
+    erros.forEach(function(erro){
+        var li = document.createElement("li");
+        li.textContent = erro;
+        li.classList.add("paciente-invalido-form");
+        alerta.appendChild(li);
+    })
+    return;
+}   
 
 function criarTr(paciente){
     var pacienteTr = document.createElement("tr");
