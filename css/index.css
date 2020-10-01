@@ -154,3 +154,8 @@ button[disabled=disabled], button:disabled {
 	border-radius: 10px;
 	text-align: center;
 }
+
+.fadeOut{
+	opacity: 0;
+	transition: 1s;
+}
