@@ -139,6 +139,7 @@ button[disabled=disabled], button:disabled {
 }
 
 .paciente-invalido-form{
+	width:100%;
 	background-color: lightcoral;
 	font-weight: bold;
 	padding: 10px;

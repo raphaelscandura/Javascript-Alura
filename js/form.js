@@ -18,14 +18,17 @@ botaoAdicionar.addEventListener("click", function(event){
         alerta.classList.add("paciente-valido-form");
     }
 
-    var pacienteTr = criarTr(paciente);
-
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
+    adicionarNaTabela(paciente);
 
     form.reset();
 
 });
+
+function adicionarNaTabela(paciente){
+    var pacienteTr = criarTr(paciente);
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
 
 
 function pegarPacienteDoForm(form){
